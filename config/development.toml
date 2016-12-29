@@ -1,0 +1,9 @@
+[MongoDB]
+host = '127.0.0.1:27017'
+database = 'company'
+# 
+# [YunLuWang]
+# apiUrl = 'http://test.yunluwang.com/router'
+#
+# [Client]
+# origin = ['http://localhost:8080', 'http://127.0.0.1:8080']
