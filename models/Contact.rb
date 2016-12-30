@@ -19,6 +19,9 @@ class Contact
   field :create_uid, type: String, label: '创建人'
   field :write_date, type: DateTime, label: '最后更新时间'
   field :write_uid, type: String, label: '最后更新人'
+  field :supplier, type: Boolean, label: '是否供应商'
+  field :customer, type: Boolean, label: '是否客户'
+  field :employee, type: Boolean, label: '是否员工'
 
   validates :name, presence: true, uniqueness: true
 

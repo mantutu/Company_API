@@ -38,7 +38,7 @@ namespace '/api' do
       bank.delete
       json :message => "success"
     else
-      halt 400, "该银行不存在"
+      halt 400, "不存在ID为#{id}的银行"
     end
   end
 
@@ -56,7 +56,7 @@ namespace '/api' do
       json Bank.find(bank.id).to_hash
     else
       halt 400, bank.errors.full_messages
-    end    
+    end
   end
 
 end
