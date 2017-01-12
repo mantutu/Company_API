@@ -3,7 +3,8 @@ namespace '/api' do
   get '/contact' do
     query, sort, page, size = parse_query_params(params)
     contacts = Contact.where(generate_query(query))
-    json contacts
+    contacts = contacts.paginate(page: page, per_page: size)
+    json :item => contacts.collect(&:to_hash), :total => contacts.total_entries
   end
 
   get '/contact/:id' do |id|

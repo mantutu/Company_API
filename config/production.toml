@@ -5,5 +5,5 @@ database = 'company_production'
 # [YunLuWang]
 # apiUrl = 'http://api.yunluwang.com/router'
 #
-# [Client]
-# origin = ['http://www.yunluwang.com']
+[Client]
+origin = ['http://www.yunluwang.com']

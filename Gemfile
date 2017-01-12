@@ -11,3 +11,4 @@ gem 'hashie'
 gem 'toml-rb', require: 'toml'
 gem 'httparty'
 gem 'rake', require: false
+gem 'digest', require: 'digest/md5'

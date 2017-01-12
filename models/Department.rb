@@ -17,6 +17,7 @@ class Department
   field :write_uid, type: String, label: '最后更新人'
 
   has_many :employees
+  has_many :jobs
 
   # has_one :manager_id
   # has_many :member_ids
@@ -25,8 +26,16 @@ class Department
   # belongs_to :department
 
   def total_employee
-    self.employees.find().count
+    self.employees.count()
   end
+
+  def total_job
+    self.jobs.count()
+  end
+
+  # def child_departments
+  #   self.departments.count()
+  # end
 
   def to_hash
     hash = {'id' => self.id.to_s}
@@ -39,6 +48,8 @@ class Department
       end
     end
     hash.store 'total_employee', self.total_employee
+    hash.store 'total_job', self.total_job
+    # hash.store 'child_departments', self.child_departments
     hash
   end
 

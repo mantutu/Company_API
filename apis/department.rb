@@ -7,6 +7,19 @@ namespace '/api' do
     json :item => departments.collect(&:to_hash), :total => departments.total_entries
   end
 
+  get '/department/:id' do |id|
+    department = Department.find(id)
+    if department.nil?
+      halt 400, "不存在ID为#{id}的部门"
+    end
+
+    result = department.to_hash
+    employees = Employee.where(:department_id => id)
+    result.store 'employees', employees.collect()
+
+    json result
+  end
+
   post '/department' do
     fields = JSON.parse(request.body.read)
     department = Department.new
