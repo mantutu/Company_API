@@ -20,10 +20,13 @@ namespace '/api' do
   end
 
   post '/user' do
+    payload, error = verify_jwt(request)
     fields = JSON.parse(request.body.read)
     user = User.new
     user.update_attributes(fields)
     user.password = Digest::MD5.hexdigest(fields['password'])
+    user.write_account = payload.username
+    user.create_account = payload.username
     user.create_date = Time.now
     user.write_date = Time.now
     if user.save
