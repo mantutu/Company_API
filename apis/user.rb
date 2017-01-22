@@ -36,6 +36,20 @@ namespace '/api' do
     end
   end
 
+  post '/admin' do
+    fields = JSON.parse(request.body.read)
+    user = User.new
+    user.update_attributes(fields)
+    user.password = Digest::MD5.hexdigest(fields['password'])
+    user.create_date = Time.now
+    user.write_date = Time.now
+    if user.save
+      json User.find(user.id).to_hash
+    else
+      user.errors.full_messages
+    end
+  end
+
   delete '/user/:id' do |id|
     user = User.find(id)
     if user != nil

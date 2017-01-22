@@ -12,16 +12,17 @@ namespace '/account' do
     if user.password != password
       halt 400, "用户名或密码不正确"
     else
-      expire_time = Date.today.next_day(14).to_time.to_i + 3600 * 4
-      payload = {username: username, exp: expire_time}
-      payload[:token] = JWT.encode payload, settings.token_secret
-      payload[:permission] = user.permission
-      json payload
+      user.last_presence = Time.now
+      if user.save
+        expire_time = Date.today.next_day(14).to_time.to_i + 3600 * 4
+        payload = {username: username, exp: expire_time}
+        payload[:token] = JWT.encode payload, settings.token_secret
+        payload[:role] = Role.find(user.role_id).to_hash
+        json payload
+      else
+        user.errors.full_messages
+      end
     end
-  end
-
-  post 'logout' do
-    
   end
 
 end

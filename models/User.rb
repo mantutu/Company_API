@@ -4,9 +4,9 @@ class User
   include Mongoid::Document
 
   field :ordinal, type: Integer, label: '编号'
+  field :role_id, type: String, label: '角色'
   field :username, type: String, label: '用户名'
   field :password, type: String, label: '密码'
-  field :permission, type: Array, label: '权限', default: []
   field :realname, type: String, label: '姓名'
   field :email, type: String, label: 'Email'
   field :phone, type: Integer, label: '联系方式'
