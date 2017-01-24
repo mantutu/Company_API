@@ -4,7 +4,8 @@ namespace '/api' do
   get '/product' do
     query, sort, page, size = parse_query_params(params)
     products = Product.where(generate_query(query))
-    json products
+    products = products.paginate(page: page, per_page: size)
+    json :item => products.collect(&:to_hash), :total => products.total_entries
   end
 
   # 获取产品详情

@@ -19,9 +19,12 @@ namespace '/api' do
   end
 
   post '/contact' do
+    payload, error = verify_jwt(request)
     fields = JSON.parse(request.body.read)
     contact = Contact.new
     contact.update_attributes(fields)
+    contact.write_account = payload.username
+    contact.create_account = payload.username
     contact.create_date = Time.now
     contact.write_date = Time.now
     if contact.save
@@ -31,7 +34,7 @@ namespace '/api' do
     end
   end
 
-  patch '/contact/:id' do
+  patch '/contact/:id' do |id|
     contact = Contact.find(id)
 
     if contact.nil?

@@ -12,7 +12,7 @@ class PurchaseOrder
   field :partner_ref, type: String, label: '供应商参考' 	# 销售订单的参照或者供应商发出的投标。当你接收产品的时候被显示在收货单上。主要用来做匹配
   field :product_id, type: String, label: '产品'
   field :is_shipped, type: Boolean, label: '已送货'
-  field :state, type: Array, label: '状态'
+  field :state, type: String, label: '状态'
   field :order_line, type: Array, label: '订单行'
   field :confirmation_date, type: DateTime, label: '确认日期'
   field :date_order, type: DateTime, label: '单据日期'
